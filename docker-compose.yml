@@ -1,0 +1,25 @@
+
+version: '3.8'
+
+services:
+  bot-web:
+    build: .
+    ports:
+      - "10000:10000"
+    container_name: ev_bot_web
+    restart: always
+    environment:
+      - ODDS_API_KEY=${ODDS_API_KEY}
+      - API_SPORTS_KEY=${API_SPORTS_KEY}
+      - SGO_API_KEY=${SGO_API_KEY}
+    command: python main.py
+
+  bot-worker:
+    build: .
+    container_name: ev_bot_worker
+    restart: always
+    environment:
+      - ODDS_API_KEY=${ODDS_API_KEY}
+      - API_SPORTS_KEY=${API_SPORTS_KEY}
+      - SGO_API_KEY=${SGO_API_KEY}
+    command: python telegram_bot/send_weekly_pdf.py
