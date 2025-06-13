@@ -1,1 +1,0 @@
-# Coleta de apostas públicas
